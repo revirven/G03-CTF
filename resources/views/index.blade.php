@@ -43,7 +43,7 @@
 
                         @auth
                             <button class="btn btn-outline-danger btn-shadow px-3 my-2 ml-0 ml-sm-1 text-left typewriter" onclick="(function(){window.location.href='{{ route('home.instruct') }}'})();">
-                                <h4>Hack on</h4>
+                                <h4>Hack on!</h4>
                             </button>
                         @endauth
                     </div>
