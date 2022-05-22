@@ -25,7 +25,7 @@ class UserController extends Controller
     }
 
     public function authenticate() {
-
+        
     }
     
     public function add(RegisterRequest $request) {
@@ -38,7 +38,6 @@ class UserController extends Controller
         
         $user->save();
 
-        return redirect()->route('user.login');
+        return redirect()->route('user.login')->withErrors(['success' => 'Successfully registered. You can now login.']);
     }
-
 }
