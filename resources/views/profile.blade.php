@@ -94,7 +94,7 @@
     <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 
     <script>
-        var xValues = ["Challenge 2.1", "Challenge 2.2", "Challenge 2.3", "Challenge 1"];
+        var xValues = ["Web Exploitation", "Binary Exploitation", "Reverse Engineering", "Forensics"];
         var yValues = [2540, 1900, 650, 550];
         var barColors = [
         "#b91d47",

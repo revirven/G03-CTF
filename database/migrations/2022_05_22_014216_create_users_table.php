@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('email', 50);
             $table->string('username', 30);
             $table->string('password', 255);
+            $table->bigInteger('score')->nullable();
+            $table->bigInteger('rank')->nullable();
             $table->timestamps();
         });
     }

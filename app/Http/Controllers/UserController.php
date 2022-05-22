@@ -29,6 +29,7 @@ class UserController extends Controller
     }
 
     public function profile () {
+        
         return view('/profile');
     }
 
@@ -63,7 +64,7 @@ class UserController extends Controller
  
         $request->session()->invalidate();
     
-        // $request->session()->regenerateToken();
+        $request->session()->regenerateToken();
  
         return redirect()->route('home.index');
     }

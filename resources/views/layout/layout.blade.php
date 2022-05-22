@@ -51,8 +51,8 @@
                         @auth
                             <a href="{{ route('user.chall') }}" class="p-3 text-decoration-none text-light bold">Challenges</a>
                             <a href="{{ route('user.profile') }}" class="p-3 text-decoration-none text-light bold">Profile</a>
-                            <a href="{{ route('home.index') }}" class="p-3 text-decoration-none text-light bold" onclick="event.preventDefault(); document.getElementById('form_logout').submit()">Logout</a>
-                            <form id="form_logout" type="hidden" action="{{ route('user.logout') }}">@CSRF</form>
+                            <a href="" class="p-3 text-decoration-none text-light bold" onclick="event.preventDefault(); document.getElementById('form_logout').submit()">Logout</a>
+                            <form id="form_logout" type="hidden" method="post" action="{{ route('user.logout') }}">@CSRF</form>
                         @endauth
                     </div>
                 </div>

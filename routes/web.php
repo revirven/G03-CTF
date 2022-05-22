@@ -30,7 +30,6 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/challenges', [UserController::class, 'challenges'])->name('user.chall');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
-
 });
 
 Route::post('/login', [UserController::class, 'authenticate'])->name('user.auth');
