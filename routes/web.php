@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,5 @@ Route::middleware('auth')->group(function () {
 Route::post('/login', [UserController::class, 'authenticate'])->name('user.auth');
 Route::post('/register', [UserController::class, 'add'])->name('user.add');
 Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
+
+URL::forceScheme('https');
