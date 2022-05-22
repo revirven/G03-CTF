@@ -39,6 +39,7 @@ class LoginRequest extends FormRequest
         return [
             'email.required' => 'Email is required.',
             'email.email' => 'Invalid email address.',
+            
             'password.required' => 'Password is required.',
             'password.max' => 'Password can only be 72 characters long.'
         ];

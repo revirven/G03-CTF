@@ -21,4 +21,8 @@ class HomeController extends Controller
     public function hackerboard() {
         return view('/hackerboard');
     }
+
+    public function challenges() {
+        return view('/challenges');
+    }
 }

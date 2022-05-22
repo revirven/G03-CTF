@@ -24,8 +24,25 @@ class UserController extends Controller
         return view('/user/register');
     }
 
-    public function authenticate() {
-        
+    public function challenges() {
+        return view('/challenges');
+    }
+
+    public function profile () {
+        return view('/profile');
+    }
+
+    public function authenticate(LoginRequest $request) {
+        $credentials = $request->validated();
+
+        if (Auth::attempt($credentials)) {
+            
+            $request->session()->regenerate();
+            
+            return redirect()->route('home.index');
+        }
+
+        return redirect()->back()->withErrors(['fail' => 'Incorrect email or password.']);
     }
     
     public function add(RegisterRequest $request) {
@@ -39,5 +56,15 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('user.login')->withErrors(['success' => 'Successfully registered. You can now login.']);
+    }
+
+    public function logout(Request $request) {
+        Auth::logout();
+ 
+        $request->session()->invalidate();
+    
+        // $request->session()->regenerateToken();
+ 
+        return redirect()->route('home.index');
     }
 }

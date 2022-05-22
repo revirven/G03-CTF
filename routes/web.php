@@ -22,7 +22,17 @@ Route::get('/instruct', [HomeController::class, 'instruction'])->name('home.inst
 Route::get('/hackerboard', [HomeController::class, 'hackerboard'])->name('home.hackerboard');
 
 // User
-Route::get('/login', [UserController::class, 'login'])->name('user.login');
-Route::get('/register', [UserController::class, 'register'])->name('user.register');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [UserController::class, 'login'])->name('user.login');
+    Route::get('/register', [UserController::class, 'register'])->name('user.register');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/challenges', [UserController::class, 'challenges'])->name('user.chall');
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+
+});
+
 Route::post('/login', [UserController::class, 'authenticate'])->name('user.auth');
 Route::post('/register', [UserController::class, 'add'])->name('user.add');
+Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');

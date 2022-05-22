@@ -35,9 +35,17 @@
                         <p class="mt-5 text-grey text-spacey hackerFont lead">
                             The quieter you become the more you are able to hear.
                         </p>
-                        <button class="btn btn-outline-danger btn-shadow px-3 my-2 ml-0 ml-sm-1 text-left typewriter" onclick="(function(){window.location.href='{{ route('user.login') }}'})();">
-                            <h4>Login</h4>
-                        </button>
+                        @guest
+                            <button class="btn btn-outline-danger btn-shadow px-3 my-2 ml-0 ml-sm-1 text-left typewriter" onclick="(function(){window.location.href='{{ route('user.login') }}'})();">
+                                <h4>Login</h4>
+                            </button>
+                        @endguest
+
+                        @auth
+                            <button class="btn btn-outline-danger btn-shadow px-3 my-2 ml-0 ml-sm-1 text-left typewriter" onclick="(function(){window.location.href='{{ route('user.chall') }}'})();">
+                                <h4>Hack on</h4>
+                            </button>
+                        @endauth
                     </div>
                 </div>
             </div>
