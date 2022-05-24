@@ -38,4 +38,4 @@ Route::post('/login', [UserController::class, 'authenticate'])->name('user.auth'
 Route::post('/register', [UserController::class, 'add'])->name('user.add');
 Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
 
-// URL::forceScheme('https');
+URL::forceScheme('https');
