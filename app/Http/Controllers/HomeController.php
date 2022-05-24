@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\User;
+use App\Models\Profile;
+
 class HomeController extends Controller
 {
     public function home() {
@@ -20,9 +23,5 @@ class HomeController extends Controller
 
     public function hackerboard() {
         return view('/hackerboard');
-    }
-
-    public function challenges() {
-        return view('/challenges');
     }
 }

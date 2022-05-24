@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ChallengeController;
 use Illuminate\Support\Facades\URL;
 
 /*
@@ -29,7 +30,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/challenges', [UserController::class, 'challenges'])->name('user.chall');
+    Route::get('/challenges', [ChallengeController::class, 'show'])->name('chall.show');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
 });
 
@@ -37,4 +38,4 @@ Route::post('/login', [UserController::class, 'authenticate'])->name('user.auth'
 Route::post('/register', [UserController::class, 'add'])->name('user.add');
 Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
 
-URL::forceScheme('https');
+// URL::forceScheme('https');

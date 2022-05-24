@@ -24,14 +24,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
-                    <h1 class="display-1 bold color_white content__title text-center"><span class="color_danger">SCORE</span>BOARD<span class="vim-caret">&nbsp;</span></h1>
+                    <h1 class="display-1 bold color_white content__title text-center"><span class="color_danger">PROFILE: </span>{{ $username }}<span class="vim-caret">&nbsp;</span></h1>
                     <p class="text-grey lead text-spacey text-center hackerFont">
                         In life the loser's score is always zero
                     </p>
                     <div class="row justify-content-center my-5">
                         <div class="col-xl-10">
                             <h4 class="bold color_white pt-3" style="text-align: center">
-                                Score: 5640 points - Rank: 10th place
+                                Score: {{ $totalScore }} points - Rank: {{ $str_rank }} place
                             </h4>
                             <canvas id="myChart"></canvas>
                         </div>
@@ -95,12 +95,16 @@
 
     <script>
         var xValues = ["Web Exploitation", "Binary Exploitation", "Reverse Engineering", "Forensics"];
-        var yValues = [2540, 1900, 650, 550];
+        var yValues = {{ Js::from($scores) }};
         var barColors = [
-        "#b91d47",
-        "#00aba9",
-        "#2b5797",
-        "#e8c3b9"
+        // "#b91d47",
+        // "#00aba9",
+        // "#2b5797",
+        // "#e8c3b9"
+            "#ef121b94",
+            "#f9751594",
+            "#17b06b94",
+            "#36a2eb94"
         ];
 
         new Chart("myChart", {
