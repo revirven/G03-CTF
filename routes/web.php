@@ -27,15 +27,15 @@ Route::get('/hackerboard', [HomeController::class, 'hackerboard'])->name('home.h
 Route::middleware('guest')->group(function () {
     Route::get('/login', [UserController::class, 'login'])->name('user.login');
     Route::get('/register', [UserController::class, 'register'])->name('user.register');
+    Route::post('/login', [UserController::class, 'authenticate'])->name('user.auth');
+    Route::post('/register', [UserController::class, 'add'])->name('user.add');
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('/challenges', [ChallengeController::class, 'show'])->name('chall.show');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::put('/challenges', [ChallengeController::class, 'submit'])->name('chall.submit');
+    Route::post('/profile', [UserController::class, 'logout'])->name('user.logout');
 });
-
-Route::post('/login', [UserController::class, 'authenticate'])->name('user.auth');
-Route::post('/register', [UserController::class, 'add'])->name('user.add');
-Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
 
 URL::forceScheme('https');

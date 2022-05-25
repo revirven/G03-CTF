@@ -16,8 +16,9 @@ class CreateChallengesTable extends Migration
         Schema::create('challenges', function (Blueprint $table) {
             $table->id('id');
             $table->string('name', 50);
-            $table->string('hint', 200);
-            $table->string('file', 50);
+            $table->string('descript', 200);
+            $table->string('hint', 200)->nullable();
+            $table->string('file', 50)->nullable();
             $table->enum('category', ['web', 'pwn', 'rev', 'frs']);
             $table->bigInteger('score');
             $table->string('flag', 255);

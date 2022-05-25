@@ -46,39 +46,32 @@
                                 <th>#</th>
                                 <th>Challenge</th>
                                 <th>Category</th>
-                                <th>Total Time Taken</th>
                                 <th>Score</th>
+                                <th>Validated at</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Challenge 2.1 - dump.raw</td>
-                                <td>Forensics</td>
-                                <td>42:59</td>
-                                <td>2540</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Challenge 2.2 - dump.raw</td>
-                                <td>Forensics</td>
-                                <td>44:59</td>
-                                <td>1900</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Challenge 2.3 - dump.raw</td>
-                                <td>Forensics</td>
-                                <td>40:00</td>
-                                <td>650</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Challenge 1 - memory.dmp</td>
-                                <td>Forensics</td>
-                                <td>40:10</td>
-                                <td>550</td>
-                            </tr>
+                            @foreach($solves as $solve)
+                                <tr>
+                                    <th scope="row">{{ $index++ }}</th>
+                                    <td>{{ $solve->name }}</td>
+                                    @switch($solve->category)
+                                        @case('web')
+                                            <td>Web Exploitation</td>
+                                            @break
+                                        @case('web')
+                                            <td>Binary Exploitation</td>
+                                            @break
+                                        @case('rev')
+                                            <td>Reverse Engineering</td>
+                                            @break
+                                        @case('frs')
+                                            <td>Forensics</td>
+                                    @endswitch
+                                    <td>{{ $solve->score }}</td>
+                                    <td>{{ $solve->created_at }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

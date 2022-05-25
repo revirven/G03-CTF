@@ -15,6 +15,8 @@ class CreateSolvesTable extends Migration
     {
         Schema::create('solves', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('challenge_id')->constrained();
             $table->timestamps();
         });
     }

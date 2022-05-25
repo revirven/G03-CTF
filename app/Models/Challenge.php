@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Challenge extends Model
 {   
     use HasFactory;
+
+    public function solves() {
+        return $this->hasMany(Solve::class);
+    }
 }

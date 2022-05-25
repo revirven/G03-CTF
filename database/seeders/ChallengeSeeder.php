@@ -21,8 +21,9 @@ class ChallengeSeeder extends Seeder
         $challenge = new Challenge();
 
         $challenge->name = Str::random(10);
-        $challenge->hint = Str::random(10);
-        $challenge->file = 'file';
+        $challenge->descript = Str::random(50);
+        $challenge->hint = Str::random(50);
+        $challenge->file = Str::random(20);
         $challenge->category = $cat[rand(0, 3)];
         $challenge->score = rand(100, 1000);
         $challenge->flag = Hash::make('g03_ctf{fake_flag}');

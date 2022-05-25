@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\User;
 use App\Models\Profile;
-use App\Models\Challenge;
+use App\Models\Solve;
 
 // Format data
 use Illuminate\Support\Str;
@@ -37,8 +37,9 @@ class UserController extends Controller
 
     public function profile () {
         $user = User::where('email', session()->get('email'))->first();
-        $profile = $user->profile->select('id', 'web', 'pwn', 'rev', 'frs', 'total')->first();
 
+        $profile = $user->profile()->select('id', 'web', 'pwn', 'rev', 'frs', 'total')->first();
+        
         $username = Str::upper($user->username);
         $scores = array($profile->web, $profile->pwn, $profile->rev, $profile->frs);
         $totalScore = $profile->total;
@@ -46,7 +47,15 @@ class UserController extends Controller
         $rank = $this->getRank($profile->id);
         $str_rank = $this->formatRank($rank);
 
-        return view('/user/profile', compact('scores', 'totalScore', 'str_rank', 'username'));
+        $solves = $user->solves()
+            ->join('challenges', 'solves.challenge_id', '=', 'challenges.id')
+            ->select('challenges.name', 'challenges.category', 'challenges.score', 'solves.created_at')
+            ->orderBy('solves.created_at', 'desc')
+            ->get();
+        
+        $index = 1;
+        
+        return view('/user/profile', compact('scores', 'totalScore', 'str_rank', 'username', 'solves', 'index'));
     }
 
     public function authenticate(LoginRequest $request) {

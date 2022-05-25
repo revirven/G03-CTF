@@ -38,27 +38,56 @@
                             @case('frs')
                                 <div class="card category_forensics">
                         @endswitch
-                            <div class="card-header" data-target="#problem_id_{{ $chall->id }}" data-toggle="collapse" aria-expanded="false" aria-controls="problem_id_6">
+                        @if(in_array($chall->id, $solved))
+                            <div id="header_{{ $chall->id }}" class="solved card-header" data-target="#problem_id_{{ $chall->id }}" data-toggle="collapse" aria-expanded="false" aria-controls="problem_id_{{ $chall->id }}">
                                 {{ $chall->name }} <span class="badge align-self-end">{{ $chall->score }} points</span>
                             </div>
+                        @else
+                            <div id="header_{{ $chall->id }}" class="card-header" data-target="#problem_id_{{ $chall->id }}" data-toggle="collapse" aria-expanded="false" aria-controls="problem_id_{{ $chall->id }}">
+                                {{ $chall->name }} <span class="badge align-self-end">{{ $chall->score }} points</span>
+                            </div>
+                        @endif
+                        @if(isset($msg) && $chall->id === $msg['chall_id'])
+                            <div id="problem_id_{{ $chall->id }}" class="collapse show card-body">
+                        @else
                             <div id="problem_id_{{ $chall->id }}" class="collapse card-body">
+                        @endif
                                 <blockquote class="card-blockquote">
                                     <div style="display: flex;">
-                                        <h6 class="solvers">Solvers: <span class="solver_num">76</span> &nbsp;<span class="color_danger">Difficulty:</span></h6>
-                                        <div class="pl-2"><canvas style="width:80px;height:20px" id="problem_id_6_chart"></canvas></div>
+                                        <h6 class="solvers">Solvers: <span class="solver_num">76</span> &nbsp</h6>
                                     </div>
-                                    <p> Can you find the password? Enter the password as flag in the following form: lakshya_CTF{passwordhere}
-                                    </p>
-                                    <a target="_blank" href="#!" class="btn btn-outline-secondary btn-shadow"><span class="fa fa-download mr-2"></span>Download</a>
-                                    <a href="#hint_{{ $chall->id }}" data-toggle="modal" data-target="#hint_{{ $chall->id }}" class="btn btn-outline-secondary btn-shadow"><span class="far fa-lightbulb mr-2"></span>Hint</a>
+                                    <p> {{ $chall->descript }} </p>
+                                    @if(!is_null($chall->file))
+                                        <a target="_blank" href="#!" class="btn btn-outline-secondary btn-shadow"><span class="fa fa-download mr-2"></span>Download</a>
+                                    @endif
+                                    @if(!is_null($chall->hint))
+                                        <a href="#hint_{{ $chall->id }}" data-toggle="modal" data-target="#hint_{{ $chall->id }}" class="btn btn-outline-secondary btn-shadow"><span class="far fa-lightbulb mr-2"></span>Hint</a>
+                                    @endif
                                     <br><br>
                                     <div class="input-group mt-3">
-                                        <input type="text" class="form-control" placeholder="Enter Flag" aria-label="Enter Flag" aria-describedby="basic-addon2">
+                                        <form id="chall_submit_{{ $chall->id }}" method="post", action="{{ route('chall.submit') }}">
+                                            @CSRF
+                                            @method('put')
+                                            <input type="text" class="form-control" placeholder="Enter Flag" aria-label="Enter Flag" aria-describedby="basic-addon2" name="flag">
+                                            <input type="hidden" name="challenge_id" value="{{ $chall->id }}">
+                                        </form>
                                         <div class="input-group-append">
-                                            <button id="submit_p6" class="btn btn-outline-secondary" type="button">Go!</button>
+                                            <button id="submit_p6" class="btn btn-outline-secondary" type="submit" form="chall_submit_{{ $chall->id }}">Submit</button>
                                         </div>
                                     </div>
                                 </blockquote>
+                                @if(isset($msg) && $chall->id === $msg['chall_id'])
+                                    @if ($msg['validated'])
+                                        <div id="alert_{{ $chall->id }}" class="alert alert-success alert-dismissible fade show" role="alert">
+                                    @else
+                                        <div id="alert_{{ $chall->id }}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    @endif
+                                        {{ $msg['note'] }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
