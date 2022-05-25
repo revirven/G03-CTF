@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::put('/challenges', [ChallengeController::class, 'submit'])->name('chall.submit');
     Route::post('/profile', [UserController::class, 'logout'])->name('user.logout');
+    Route::get('/challenges/download', [ChallengeController::class, 'fileDownload'])->name('chall.download');
 });
 
-URL::forceScheme('https');
+// URL::forceScheme('https');

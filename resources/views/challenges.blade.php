@@ -58,7 +58,7 @@
                                     </div>
                                     <p> {{ $chall->descript }} </p>
                                     @if(!is_null($chall->file))
-                                        <a target="_blank" href="#!" class="btn btn-outline-secondary btn-shadow"><span class="fa fa-download mr-2"></span>Download</a>
+                                        <a target="_blank" href="{{ route('chall.download', 1) }}" class="btn btn-outline-secondary btn-shadow"><span class="fa fa-download mr-2"></span>Download</a>
                                     @endif
                                     @if(!is_null($chall->hint))
                                         <a href="#hint_{{ $chall->id }}" data-toggle="modal" data-target="#hint_{{ $chall->id }}" class="btn btn-outline-secondary btn-shadow"><span class="far fa-lightbulb mr-2"></span>Hint</a>

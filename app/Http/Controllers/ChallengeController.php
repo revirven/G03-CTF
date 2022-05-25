@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Challenge;
 use App\Models\Solve;
@@ -91,5 +92,10 @@ class ChallengeController extends Controller
             'chall_id' => $chall->id,
             'validated' => false]
         );
+    }
+
+    public function fileDownload($file) {
+        dd($file);
+        return Storage::download($file);
     }
 }
