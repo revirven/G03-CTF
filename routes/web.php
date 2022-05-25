@@ -39,4 +39,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/challenges/download', [ChallengeController::class, 'fileDownload'])->name('chall.download');
 });
 
-// URL::forceScheme('https');
+URL::forceScheme('https');
